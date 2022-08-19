@@ -41,7 +41,7 @@ class TMP007
 
     @i2c.write(TMP007::I2CADDR, TMP007::DEVID)
 
-    data = @i2c.read_integer(TMP007::I2CADDR, 2)
+    data = @i2c.readfrom(TMP007::I2CADDR, 2)
 
     value = ((data[0]) << 8) | data[1]
     did = value
@@ -63,7 +63,7 @@ class TMP007
 
   def read_obj_temp_c()
     @i2c.write(TMP007::I2CADDR, TMP007::TOBJ)
-    data = @i2c.read_integer(TMP007::I2CADDR, 2)
+    data = @i2c.readfrom(TMP007::I2CADDR, 2)
     value = ((data[0]) << 8) | data[1]
     raw = value
     if (raw & 0x1 != 0)
@@ -77,7 +77,7 @@ class TMP007
 
   def read_raw_die_temperature()
     @i2c.write(TMP007::I2CADDR, TMP007::TDIE)
-    data = @i2c.read_integer(TMP007::I2CADDR, 2)
+    data = @i2c.readfrom(TMP007::I2CADDR, 2)
     value = ((data[0]) << 8) | data[1]
     raw = value
     raw >>= 2
@@ -86,7 +86,7 @@ class TMP007
 
   def read_raw_voltage()
     @i2c.write(TMP007::I2CADDR, TMP007::VOBJ)
-    data = @i2c.read_integer(TMP007::I2CADDR, 2)
+    data = @i2c.readfrom(TMP007::I2CADDR, 2)
     value = ((data[0]) << 8) | data[1]
     raw = value
     return raw
